@@ -18,6 +18,8 @@ app.post('/insert',(req,res)=>{
 //read
 app.get('/getAll',(req,res)=>
 {
+  const db = db.get();
+  const result = db.getAllData();
   response.json({
     success: true,
     message:"happy days"

@@ -16,3 +16,28 @@ connection.connect((err)=>{
     }
     console.log('db'+connection.state);
 })
+
+class db{
+    static getdbInstance(){
+        return instance ? instance : new db();
+    }
+    async getAllData(){
+        try {
+            const response=await new Promise((resolve,reject)=>{
+                const query ="select * from names where id=?";
+                
+                connection.query(query,(err,results)=>
+                {
+                    if(err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            })
+            return response;
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+module.exports=db;
